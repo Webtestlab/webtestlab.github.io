@@ -465,20 +465,21 @@ if(fix){fix.style.opacity=0;addEventListener('scroll',()=>{fix.style.opacity=scr
 <script>
 (function(){
   try{
-    var NS = "shanu-go1";
+    var NS = "shanu-go1", META = "shanu-go1-meta", EPOCH = 1;
     var API = "https://abacus.jasoncameron.dev";
     var q = new URLSearchParams(location.search);
     var isMe = q.get("me") === "1";                     // Zain khud jab check kare: ?me=1
     var allowHeadless = q.get("cnt") === "1";           // sirf testing ke liye
     if (navigator.webdriver && !allowHeadless) return;  // headless/bot hits count na hon
 
-    function bump(key, by){
+    function key(k){ return k + "-e" + EPOCH; }         // reset = epoch badal jata hai (server par)
+    function bump(k, by){
       by = by || 1;
-      var url = API + "/hit/" + NS + "/" + key + (by > 1 ? "?amount=" + by : "");
-      try { fetch(url, { mode: "cors", cache: "no-store" }).catch(function(){}); } catch(e){}
+      var url = API + "/hit/" + NS + "/" + key(k) + (by > 1 ? "?amount=" + by : "");
+      try { fetch(url, { mode:"cors", cache:"no-store" }).catch(function(){}); } catch(e){}
     }
-    function read(key){
-      try { return fetch(API + "/get/" + NS + "/" + key, { cache: "no-store" }).then(function(r){ return r.json(); }); }
+    function read(k){
+      try { return fetch(API + "/get/" + NS + "/" + key(k), { cache: "no-store" }).then(function(r){ return r.json(); }); }
       catch(e){ return Promise.resolve(null); }
     }
     window.shanuPreviewStats = function(){
@@ -490,24 +491,31 @@ if(fix){fix.style.opacity=0;addEventListener('scroll',()=>{fix.style.opacity=scr
       });
     };
 
-    if (isMe){ bump("opens-me"); }
-    else {
-      bump("opens-other");
-      // naya browser ya dobara?
-      var seen = false;
-      try { seen = !!localStorage.getItem("shanu-seen"); } catch(e){}
-      if (seen) bump("repeat-opens");
-      else { bump("new-visitors"); try { localStorage.setItem("shanu-seen", "1"); } catch(e){} }
-      // referrer se pata chale kahan se khula (WhatsApp/Telegram/other)
-      var ref = (document.referrer || "").toLowerCase();
-      if (ref.indexOf("whatsapp") > -1) bump("ref-whatsapp");
-      else if (ref.indexOf("telegram") > -1 || ref.indexOf("t.me") > -1) bump("ref-telegram");
-      else if (ref) bump("ref-other");
+    function start(){
+      if (isMe){ bump("opens-me"); }
+      else {
+        bump("opens-other");
+        // naya browser ya dobara?
+        var seen = false;
+        try { seen = !!localStorage.getItem("shanu-seen"); } catch(e){}
+        if (seen) bump("repeat-opens");
+        else { bump("new-visitors"); try { localStorage.setItem("shanu-seen", "1"); } catch(e){} }
+        // referrer se pata chale kahan se khula (WhatsApp/Telegram/other)
+        var ref = (document.referrer || "").toLowerCase();
+        if (ref.indexOf("whatsapp") > -1) bump("ref-whatsapp");
+        else if (ref.indexOf("telegram") > -1 || ref.indexOf("t.me") > -1) bump("ref-telegram");
+        else if (ref) bump("ref-other");
+      }
+      // attention time: har 15s par 15 seconds add karo (page band hone par ruk jata hai)
+      setInterval(function(){ if (!document.hidden) bump("seconds", 15); }, 15000);
+      bump("seconds", 2);
     }
 
-    // attention time: har 15s par 15 seconds add karo (page band hone par ruk jata hai)
-    setInterval(function(){ if (!document.hidden) bump("seconds", 15); }, 15000);
-    bump("seconds", 2);
+    fetch(API + "/get/" + META + "/epoch", { cache: "no-store" })
+      .then(function(r){ return r.json(); })
+      .then(function(d){ if (d && typeof d.value === "number" && d.value > 0) EPOCH = d.value; })
+      .catch(function(){})
+      .then(start);
   } catch(e) {}
 })();
 </script>

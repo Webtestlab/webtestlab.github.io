@@ -32,7 +32,7 @@ button.ghost{background:#1b2130;color:#a8b6cf;border:1px solid #2b3448}
 <body>
 <div class="top">
   <span>Shanu Preview — Stats</span>
-  <span class="since" id="sinceLbl">all-time</span>
+  <span class="since" id="sinceLbl">loading…</span>
 </div>
 <div class="wrap">
   <div class="grid">
@@ -46,7 +46,7 @@ button.ghost{background:#1b2130;color:#a8b6cf;border:1px solid #2b3448}
   </div>
   <div class="bar">
     <button class="reset" onclick="doReset()">🔄 Reset stats</button>
-    <button class="ghost" onclick="undoReset()">Undo reset</button>
+    <button class="ghost" onclick="undoReset()">Purana record dekhein</button>
     <button onclick="load()">Refresh</button>
     <span class="foot" id="when">auto-refresh 30s</span>
   </div>
@@ -55,73 +55,88 @@ button.ghost{background:#1b2130;color:#a8b6cf;border:1px solid #2b3448}
     <b style="color:#e9eefc">Links</b><br>
     Bhejne ke liye: <span class="links"><a href="../shanu/" target="_blank">…/shanu/</a></span><br>
     Khud test karne ke liye (count me nahi jata): <span class="links"><a href="../shanu/?me=1" target="_blank">…/shanu/?me=1</a></span><br>
-    <span style="color:#8b98b5">Tip: client ko bhejne se pehle <b>Reset</b> dabayein — phir jo bhi counts aayenge wo sirf us ke baad ke honge.</span>
+    <span style="color:#8b98b5">Tip: client ko bhejne se pehle <b>Reset</b> dabayein — counter <b>server par</b> reset hota hai, is liye har device/browser par 0 se shuru dikhta hai. Purana record khatam nahi hota (upar "Purana record dekhein" se wapas dekh sakte hain).</span>
   </div>
 </div>
 <script>
-var NS = "shanu-go1";
+var API = "https://abacus.jasoncameron.dev";
+var NS = "shanu-go1";           // counters
+var META = "shanu-go1-meta";    // reset epoch (server par)
 var KEYS = ["opens-other","new-visitors","repeat-opens","seconds","opens-me","ref-whatsapp","ref-telegram","ref-other"];
-var BKEY = "shanu-stats-baseline";
+var VIEWKEY = "shanu-view-epoch";
+var CUR_EPOCH = 1;
 
-function get(k){
-  return fetch("https://abacus.jasoncameron.dev/get/" + NS + "/" + k, {cache:"no-store"})
+function jget(url){
+  return fetch(url, {cache:"no-store"})
     .then(function(r){ return r.json(); })
     .then(function(d){ return (d && typeof d.value === "number") ? d.value : 0; })
     .catch(function(){ return 0; });
 }
-function baseline(){
-  try { return JSON.parse(localStorage.getItem(BKEY) || "null"); } catch(e){ return null; }
+function getKey(k, ep){ return jget(API + "/get/" + NS + "/" + k + "-e" + ep); }
+function getEpoch(){ return jget(API + "/get/" + META + "/epoch").then(function(v){ return (v > 0) ? v : 1; }); }
+function bumpEpoch(){ return fetch(API + "/hit/" + META + "/epoch", {cache:"no-store"}).catch(function(){}); }
+function viewEpoch(){ try { var v = parseInt(localStorage.getItem(VIEWKEY) || "", 10); return (v > 0) ? v : 0; } catch(e){ return 0; } }
+function setViewEpoch(v){ try { if (v) localStorage.setItem(VIEWKEY, String(v)); else localStorage.removeItem(VIEWKEY); } catch(e){} }
+
+function allText(k, cur, prv, prevEp){
+  if (!prevEp) return "";
+  return "pehle (reset #" + prevEp + "): " + prv[k];
 }
-function setBaseline(b){ try { localStorage.setItem(BKEY, JSON.stringify(b)); } catch(e){} }
-function clearBaseline(){ try { localStorage.removeItem(BKEY); } catch(e){} }
 
-var LAST = {};
 function load(){
-  Promise.all(KEYS.map(get)).then(function(v){
-    var cur = {}; KEYS.forEach(function(k,i){ cur[k]=v[i]; });
-    LAST = cur;
-    var b = baseline();
-    var base = (b && b.vals) ? b.vals : {};
-    var since = !!b;
-    function val(k){ var x = cur[k] - (base[k] || 0); return x < 0 ? 0 : x; }
-    var o = since ? val("opens-other") : cur["opens-other"];
-    var nv = since ? val("new-visitors") : cur["new-visitors"];
-    var rp = since ? val("repeat-opens") : cur["repeat-opens"];
-    var sc = since ? val("seconds") : cur["seconds"];
+  getEpoch().then(function(ep){
+    CUR_EPOCH = ep;
+    var ve = viewEpoch();
+    var shown = (ve && ve < ep) ? ve : ep;
+    var prevEp = shown > 1 ? shown - 1 : 0;
+    var keys = KEYS.map(function(k){ return getKey(k, shown); });
+    if (prevEp) keys = keys.concat(KEYS.map(function(k){ return getKey(k, prevEp); }));
+    Promise.all(keys).then(function(v){
+      var cur = {}, prv = {};
+      KEYS.forEach(function(k,i){ cur[k] = v[i]; });
+      if (prevEp) KEYS.forEach(function(k,i){ prv[k] = v[KEYS.length + i]; });
 
-    document.getElementById("opens").textContent = o;
-    document.getElementById("newv").textContent = nv;
-    document.getElementById("rep").textContent = rp;
-    document.getElementById("secs").textContent = sc;
-    document.getElementById("avg").textContent = o ? (sc/o).toFixed(1) : "0";
-    document.getElementById("me").textContent = since ? val("opens-me") : cur["opens-me"];
-    document.getElementById("refs").textContent = "WhatsApp " + (since ? val("ref-whatsapp") : cur["ref-whatsapp"]) +
-      " · Telegram " + (since ? val("ref-telegram") : cur["ref-telegram"]) + " · other " + (since ? val("ref-other") : cur["ref-other"]);
+      var o = cur["opens-other"], nv = cur["new-visitors"], rp = cur["repeat-opens"], sc = cur["seconds"];
+      document.getElementById("opens").textContent = o;
+      document.getElementById("newv").textContent = nv;
+      document.getElementById("rep").textContent = rp;
+      document.getElementById("secs").textContent = sc;
+      document.getElementById("avg").textContent = o ? (sc/o).toFixed(1) : "0";
+      document.getElementById("me").textContent = cur["opens-me"];
+      document.getElementById("refs").textContent = "WhatsApp " + cur["ref-whatsapp"] + " · Telegram " + cur["ref-telegram"] + " · other " + cur["ref-other"];
 
-    function all(k){ return "all-time: " + cur[k]; }
-    document.getElementById("opensAll").textContent = since ? all("opens-other") : "";
-    document.getElementById("newvAll").textContent = since ? all("new-visitors") : "";
-    document.getElementById("repAll").textContent = since ? all("repeat-opens") : "";
-    document.getElementById("secsAll").textContent = since ? all("seconds") : "";
-    document.getElementById("avgAll").textContent = since && cur["opens-other"] ? ("all-time avg: " + (cur["seconds"]/cur["opens-other"]).toFixed(1)) : "";
-    document.getElementById("meAll").textContent = since ? all("opens-me") : "";
-    document.getElementById("refsAll").textContent = since ? ("all-time: WA " + cur["ref-whatsapp"] + " · TG " + cur["ref-telegram"] + " · other " + cur["ref-other"]) : "";
-    document.getElementById("sinceLbl").textContent = since ? ("reset ke baad · " + new Date(b.at).toLocaleString()) : "all-time";
+      ["opens-other","new-visitors","repeat-opens","seconds","opens-me"].forEach(function(k, i){
+        var id = ["opensAll","newvAll","repAll","secsAll","meAll"][i];
+        document.getElementById(id).textContent = allText(k, cur, prv, prevEp);
+      });
+      document.getElementById("avgAll").textContent = (prevEp && prv["opens-other"]) ? ("pehle avg: " + (prv["seconds"]/prv["opens-other"]).toFixed(1)) : "";
+      document.getElementById("refsAll").textContent = prevEp ? ("pehle: WA " + prv["ref-whatsapp"] + " · TG " + prv["ref-telegram"] + " · other " + prv["ref-other"]) : "";
+      document.getElementById("sinceLbl").textContent = (shown < ep)
+        ? ("purana record — reset #" + shown + " (live: reset #" + ep + ")")
+        : ("reset #" + ep + " ke baad · live");
 
-    var s = document.getElementById("signal");
-    if (o === 0) { s.className = "signal cold"; s.textContent = since ? "Reset ke baad abhi koi open nahi — link bhejein." : "Abhi koi activity nahi — link bhejne ke baad check karein."; }
-    else if (rp >= 2 || (sc/o) >= 60) { s.className = "signal"; s.textContent = "INTERESTED lag rahe hain — dobara khol rahe hain aur waqt de rahe hain."; }
-    else if (nv >= 2) { s.className = "signal warm"; s.textContent = "Kai alag browsers — shayad kisi aur ko bhi dikhaya/forward kiya gaya hai."; }
-    else { s.className = "signal warm"; s.textContent = "Page khula hai — thora intezar karein."; }
-    document.getElementById("when").textContent = "updated " + new Date().toLocaleTimeString() + " · auto-refresh 30s";
+      var s = document.getElementById("signal");
+      if (o === 0) { s.className = "signal cold"; s.textContent = "Reset ke baad abhi koi open nahi — link bhejein."; }
+      else if (rp >= 2 || (sc/o) >= 60) { s.className = "signal"; s.textContent = "INTERESTED lag rahe hain — dobara khol rahe hain aur waqt de rahe hain."; }
+      else if (nv >= 2) { s.className = "signal warm"; s.textContent = "Kai alag browsers — shayad kisi aur ko bhi dikhaya/forward kiya gaya hai."; }
+      else { s.className = "signal warm"; s.textContent = "Page khula hai — thora intezar karein."; }
+      document.getElementById("when").textContent = "updated " + new Date().toLocaleTimeString() + " · auto-refresh 30s";
+    });
   });
 }
+
 function doReset(){
-  if (!confirm("Reset? Ab jo bhi counts aayenge wo sirf is waqt ke baad ke honge (purana all-time record bhi dikhta rahega).")) return;
-  setBaseline({ at: Date.now(), vals: LAST });
+  if (!confirm("Reset? Counter server par 0 ho jayega (har device par). Purana record mehfooz rahega.")) return;
+  setViewEpoch(0);
+  bumpEpoch().then(function(){ load(); });
+}
+function undoReset(){
+  var ve = viewEpoch();
+  var shown = (ve && ve < CUR_EPOCH) ? ve : CUR_EPOCH;
+  if (shown <= 1) { alert("Is se pehle koi record nahi."); return; }
+  setViewEpoch(shown - 1);
   load();
 }
-function undoReset(){ clearBaseline(); load(); }
 load(); setInterval(load, 30000);
 </script>
 </body>
