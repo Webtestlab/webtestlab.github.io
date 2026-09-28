@@ -8,12 +8,14 @@
 <title>Shanu Preview — Stats</title>
 <style>
 body{margin:0;background:#0d0f17;color:#e9eefc;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.top{position:sticky;top:0;background:linear-gradient(120deg,#8c2f4a,#d81e8a 60%,#ff8a5b);padding:.9rem 1rem;font-weight:800}
+.top{position:sticky;top:0;background:linear-gradient(120deg,#8c2f4a,#d81e8a 60%,#ff8a5b);padding:.9rem 1rem;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex-wrap:wrap}
+.top .since{font-size:.8rem;font-weight:600;opacity:.95}
 .wrap{max-width:760px;margin:0 auto;padding:1.1rem}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 .card{background:#151a26;border:1px solid #242c3d;border-radius:16px;padding:1rem}
 .card b{display:block;font-size:1.9rem;line-height:1.15;background:linear-gradient(100deg,#ff9ec9,#ffcf6b);-webkit-background-clip:text;background-clip:text;color:transparent}
 .card small{color:#9fb0cc;font-size:.82rem;letter-spacing:.3px}
+.card .all{display:block;color:#6f7d99;font-size:.74rem;margin-top:.2rem}
 .wide{grid-column:1/-1}
 .note{background:#151a26;border:1px solid #242c3d;border-radius:14px;padding:.85rem 1rem;color:#b9c6dd;font-size:.9rem;margin:.9rem 0}
 .signal{margin-top:.8rem;padding:.8rem 1rem;border-radius:14px;font-weight:700;background:#152b1f;border:1px solid #24503a;color:#8ff0b5}
@@ -21,57 +23,105 @@ body{margin:0;background:#0d0f17;color:#e9eefc;font:16px/1.6 system-ui,-apple-sy
 .signal.cold{background:#1b1f2b;border-color:#2b3448;color:#a8b6cf}
 .links a{color:#ffb0d4;text-decoration:none}
 .foot{color:#7f8da8;font-size:.82rem;margin-top:1rem}
-button{background:#242c3d;color:#e9eefc;border:0;border-radius:10px;padding:.5rem .9rem;font-weight:700;cursor:pointer}
+button{background:#242c3d;color:#e9eefc;border:0;border-radius:10px;padding:.55rem .95rem;font-weight:700;cursor:pointer}
+button.reset{background:#d81e8a;color:#fff}
+button.ghost{background:#1b2130;color:#a8b6cf;border:1px solid #2b3448}
+.bar{display:flex;gap:.55rem;flex-wrap:wrap;align-items:center;margin-top:.9rem}
 </style>
 </head>
 <body>
-<div class="top">Shanu Preview — Stats</div>
+<div class="top">
+  <span>Shanu Preview — Stats</span>
+  <span class="since" id="sinceLbl">all-time</span>
+</div>
 <div class="wrap">
   <div class="grid">
-    <div class="card"><small>Visitor opens (aap ke ilawa)</small><b id="opens">–</b></div>
-    <div class="card"><small>Alag browsers (naye log)</small><b id="newv">–</b></div>
-    <div class="card"><small>Dobara kholne ki dafa</small><b id="rep">–</b></div>
-    <div class="card"><small>Total waqt (sec)</small><b id="secs">–</b></div>
-    <div class="card"><small>Average waqt / session</small><b id="avg">–</b></div>
-    <div class="card"><small>Aap ke khud ke checks</small><b id="me">–</b></div>
-    <div class="card wide"><small>Source</small><b style="font-size:1.2rem" id="refs">–</b></div>
+    <div class="card"><small>Visitor opens</small><b id="opens">–</b><span class="all" id="opensAll"></span></div>
+    <div class="card"><small>Alag browsers (naye log)</small><b id="newv">–</b><span class="all" id="newvAll"></span></div>
+    <div class="card"><small>Dobara kholne ki dafa</small><b id="rep">–</b><span class="all" id="repAll"></span></div>
+    <div class="card"><small>Total waqt (sec)</small><b id="secs">–</b><span class="all" id="secsAll"></span></div>
+    <div class="card"><small>Average waqt / session</small><b id="avg">–</b><span class="all" id="avgAll"></span></div>
+    <div class="card"><small>Aap ke khud ke checks</small><b id="me">–</b><span class="all" id="meAll"></span></div>
+    <div class="card wide"><small>Source</small><b style="font-size:1.15rem" id="refs">–</b><span class="all" id="refsAll"></span></div>
+  </div>
+  <div class="bar">
+    <button class="reset" onclick="doReset()">🔄 Reset stats</button>
+    <button class="ghost" onclick="undoReset()">Undo reset</button>
+    <button onclick="load()">Refresh</button>
+    <span class="foot" id="when">auto-refresh 30s</span>
   </div>
   <div id="signal" class="signal cold">Abhi koi activity nahi — link bhejne ke baad check karein.</div>
   <div class="note">
-    <b style="color:#e9eefc">Links:</b><br>
-    Bhejne ke liye (visitor count hota hai):<br>
-    <span class="links"><a href="../shanu/" target="_blank">…/demos/shanu/</a></span><br>
-    Khud test karne ke liye (visitor count me nahi jata):<br>
-    <span class="links"><a href="../shanu/?me=1" target="_blank">…/demos/shanu/?me=1</a></span>
-  </div>
-  <div style="display:flex;gap:.6rem;align-items:center">
-    <button onclick="load()">Refresh</button>
-    <span class="foot" id="when">auto-refresh har 30s</span>
+    <b style="color:#e9eefc">Links</b><br>
+    Bhejne ke liye: <span class="links"><a href="../shanu/" target="_blank">…/shanu/</a></span><br>
+    Khud test karne ke liye (count me nahi jata): <span class="links"><a href="../shanu/?me=1" target="_blank">…/shanu/?me=1</a></span><br>
+    <span style="color:#8b98b5">Tip: client ko bhejne se pehle <b>Reset</b> dabayein — phir jo bhi counts aayenge wo sirf us ke baad ke honge.</span>
   </div>
 </div>
 <script>
-var NS="shanu-go1";
-var KEYS=["opens-other","opens-me","new-visitors","repeat-opens","seconds","ref-whatsapp","ref-telegram","ref-other"];
-function get(k){return fetch("https://abacus.jasoncameron.dev/get/"+NS+"/"+k,{cache:"no-store"}).then(function(r){return r.json()}).then(function(d){return (d&&typeof d.value==="number")?d.value:0}).catch(function(){return 0});}
+var NS = "shanu-go1";
+var KEYS = ["opens-other","new-visitors","repeat-opens","seconds","opens-me","ref-whatsapp","ref-telegram","ref-other"];
+var BKEY = "shanu-stats-baseline";
+
+function get(k){
+  return fetch("https://abacus.jasoncameron.dev/get/" + NS + "/" + k, {cache:"no-store"})
+    .then(function(r){ return r.json(); })
+    .then(function(d){ return (d && typeof d.value === "number") ? d.value : 0; })
+    .catch(function(){ return 0; });
+}
+function baseline(){
+  try { return JSON.parse(localStorage.getItem(BKEY) || "null"); } catch(e){ return null; }
+}
+function setBaseline(b){ try { localStorage.setItem(BKEY, JSON.stringify(b)); } catch(e){} }
+function clearBaseline(){ try { localStorage.removeItem(BKEY); } catch(e){} }
+
+var LAST = {};
 function load(){
   Promise.all(KEYS.map(get)).then(function(v){
-    var o={}; KEYS.forEach(function(k,i){o[k]=v[i]});
-    var opens=o["opens-other"], newv=o["new-visitors"], rep=o["repeat-opens"], secs=o["seconds"];
-    document.getElementById("opens").textContent=opens;
-    document.getElementById("newv").textContent=newv;
-    document.getElementById("rep").textContent=rep;
-    document.getElementById("secs").textContent=secs;
-    document.getElementById("avg").textContent=opens? (secs/opens).toFixed(1):"0";
-    document.getElementById("me").textContent=o["opens-me"];
-    document.getElementById("refs").textContent="WhatsApp "+o["ref-whatsapp"]+" · Telegram "+o["ref-telegram"]+" · other "+o["ref-other"];
-    var s=document.getElementById("signal");
-    if(opens===0){s.className="signal cold";s.textContent="Abhi koi activity nahi — link bhejne ke baad check karein.";}
-    else if(rep>=2||(secs/opens)>=60){s.className="signal";s.textContent="INTERESTED lag rahe hain — dobara khol rahe hain aur waqt de rahe hain.";}
-    else if(newv>=2){s.className="signal warm";s.textContent="Kai alag browsers — shayad kisi aur ko bhi dikhaya/forward kiya gaya hai.";}
-    else{s.className="signal warm";s.textContent="Page khula hai, abhi thora waqt diya hai — thora intezar karein.";}
-    document.getElementById("when").textContent="last updated "+new Date().toLocaleTimeString()+" · auto-refresh 30s";
+    var cur = {}; KEYS.forEach(function(k,i){ cur[k]=v[i]; });
+    LAST = cur;
+    var b = baseline();
+    var base = (b && b.vals) ? b.vals : {};
+    var since = !!b;
+    function val(k){ var x = cur[k] - (base[k] || 0); return x < 0 ? 0 : x; }
+    var o = since ? val("opens-other") : cur["opens-other"];
+    var nv = since ? val("new-visitors") : cur["new-visitors"];
+    var rp = since ? val("repeat-opens") : cur["repeat-opens"];
+    var sc = since ? val("seconds") : cur["seconds"];
+
+    document.getElementById("opens").textContent = o;
+    document.getElementById("newv").textContent = nv;
+    document.getElementById("rep").textContent = rp;
+    document.getElementById("secs").textContent = sc;
+    document.getElementById("avg").textContent = o ? (sc/o).toFixed(1) : "0";
+    document.getElementById("me").textContent = since ? val("opens-me") : cur["opens-me"];
+    document.getElementById("refs").textContent = "WhatsApp " + (since ? val("ref-whatsapp") : cur["ref-whatsapp"]) +
+      " · Telegram " + (since ? val("ref-telegram") : cur["ref-telegram"]) + " · other " + (since ? val("ref-other") : cur["ref-other"]);
+
+    function all(k){ return "all-time: " + cur[k]; }
+    document.getElementById("opensAll").textContent = since ? all("opens-other") : "";
+    document.getElementById("newvAll").textContent = since ? all("new-visitors") : "";
+    document.getElementById("repAll").textContent = since ? all("repeat-opens") : "";
+    document.getElementById("secsAll").textContent = since ? all("seconds") : "";
+    document.getElementById("avgAll").textContent = since && cur["opens-other"] ? ("all-time avg: " + (cur["seconds"]/cur["opens-other"]).toFixed(1)) : "";
+    document.getElementById("meAll").textContent = since ? all("opens-me") : "";
+    document.getElementById("refsAll").textContent = since ? ("all-time: WA " + cur["ref-whatsapp"] + " · TG " + cur["ref-telegram"] + " · other " + cur["ref-other"]) : "";
+    document.getElementById("sinceLbl").textContent = since ? ("reset ke baad · " + new Date(b.at).toLocaleString()) : "all-time";
+
+    var s = document.getElementById("signal");
+    if (o === 0) { s.className = "signal cold"; s.textContent = since ? "Reset ke baad abhi koi open nahi — link bhejein." : "Abhi koi activity nahi — link bhejne ke baad check karein."; }
+    else if (rp >= 2 || (sc/o) >= 60) { s.className = "signal"; s.textContent = "INTERESTED lag rahe hain — dobara khol rahe hain aur waqt de rahe hain."; }
+    else if (nv >= 2) { s.className = "signal warm"; s.textContent = "Kai alag browsers — shayad kisi aur ko bhi dikhaya/forward kiya gaya hai."; }
+    else { s.className = "signal warm"; s.textContent = "Page khula hai — thora intezar karein."; }
+    document.getElementById("when").textContent = "updated " + new Date().toLocaleTimeString() + " · auto-refresh 30s";
   });
 }
+function doReset(){
+  if (!confirm("Reset? Ab jo bhi counts aayenge wo sirf is waqt ke baad ke honge (purana all-time record bhi dikhta rahega).")) return;
+  setBaseline({ at: Date.now(), vals: LAST });
+  load();
+}
+function undoReset(){ clearBaseline(); load(); }
 load(); setInterval(load, 30000);
 </script>
 </body>
