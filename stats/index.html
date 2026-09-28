@@ -53,17 +53,19 @@ button.ghost{background:#1b2130;color:#a8b6cf;border:1px solid #2b3448}
   <div id="signal" class="signal cold">Abhi koi activity nahi — link bhejne ke baad check karein.</div>
   <div class="note">
     <b style="color:#e9eefc">Links</b><br>
-    Bhejne ke liye: <span class="links"><a href="../shanu/" target="_blank">…/shanu/</a></span><br>
-    Khud test karne ke liye (count me nahi jata): <span class="links"><a href="../shanu/?me=1" target="_blank">…/shanu/?me=1</a></span><br>
+    Bhejne ke liye: <span class="links"><a id="lnkSite" href="../shanu/" target="_blank">…/shanu/</a></span><br>
+    Khud test karne ke liye (count me nahi jata): <span class="links"><a id="lnkMe" href="../shanu/?me=1" target="_blank">…/shanu/?me=1</a></span><br>
     <span style="color:#8b98b5">Tip: client ko bhejne se pehle <b>Reset</b> dabayein — counter <b>server par</b> reset hota hai, is liye har device/browser par 0 se shuru dikhta hai. Purana record khatam nahi hota (upar "Purana record dekhein" se wapas dekh sakte hain).</span>
   </div>
 </div>
 <script>
 var API = "https://abacus.jasoncameron.dev";
-var NS = "shanu-go1";           // counters
-var META = "shanu-go1-meta";    // reset epoch (server par)
+var QS = new URLSearchParams(location.search);
+var NS = QS.get("ns") || "shanu-go1";   // counters (har client site ka apna)
+var SITE = QS.get("site") || "shanu";   // site folder ka naam
+var META = NS + "-meta";                 // reset epoch (server par)
 var KEYS = ["opens-other","new-visitors","repeat-opens","seconds","opens-me","ref-whatsapp","ref-telegram","ref-other"];
-var VIEWKEY = "shanu-view-epoch";
+var VIEWKEY = "client-stats-view-" + NS;
 var CUR_EPOCH = 1;
 
 function jget(url){
@@ -137,6 +139,8 @@ function undoReset(){
   setViewEpoch(shown - 1);
   load();
 }
+document.getElementById("lnkSite").href = "../" + SITE + "/";
+document.getElementById("lnkMe").href = "../" + SITE + "/?me=1";
 load(); setInterval(load, 30000);
 </script>
 </body>
