@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Lovely Magic Nails — Nail Salon in the Bronx, NY | Manicure, Gel, Acrylic &amp; Nail Art</title>
+<meta name="description" content="Lovely Magic Nails — nail salon on E Tremont Ave, Bronx NY. Manicure, pedicure, gel and acrylic sets, custom nail art. Walk-ins welcome, easy online booking.">
+<meta name="theme-color" content="#ffffff">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta property="og:title" content="Lovely Magic Nails — Nail Salon in the Bronx, NY">
+<meta property="og:description" content="Gel, acrylic and custom nail art in the Bronx. Clean tools, gentle hands, walk-ins welcome.">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.png">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"NailSalon",
+  "name":"Lovely Magic Nails",
+  "description":"Nail salon in the Bronx, NY — manicure, pedicure, gel and acrylic sets, custom nail art.",
+  "url":"https://webtestlab.github.io/lovely-magic-nails/",
+  "image":"https://webtestlab.github.io/lovely-magic-nails/logo.jpg",
+  "address":{"@type":"PostalAddress","streetAddress":"3710 E Tremont Ave","addressLocality":"Bronx","addressRegion":"NY","postalCode":"10465","addressCountry":"US"}
+}
+</script>
+<style>
+:root{
+ --bg:#ffffff;--bg2:#fff7fb;--bg3:#fff1f7;
+ --ink:#2b1f33;--muted:#6f5a78;--line:#f6e2ec;
+ --magenta:#d81e8a;--pink:#ff5fa2;--coral:#ff8a5b;--purple:#8a3ffc;--gold:#f7a41d;
+ --grad:linear-gradient(120deg,#d81e8a 0%,#ff5fa2 50%,#ff8a5b 100%);
+ --grad-soft:linear-gradient(120deg,#ffe3f1,#fff0e6);
+ --r:18px;--sh:0 14px 40px rgba(216,30,138,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{width:min(1140px,92%);margin-inline:auto}
+/* ---------- animation keyframes ---------- */
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes blob{0%{transform:translate(0,0) scale(1)}33%{transform:translate(28px,-22px) scale(1.07)}66%{transform:translate(-22px,16px) scale(.95)}100%{transform:translate(0,0) scale(1)}}
+@keyframes shimmer{0%{background-position:-220% 0}100%{background-position:220% 0}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,95,162,.5)}70%{box-shadow:0 0 0 16px rgba(255,95,162,0)}100%{box-shadow:0 0 0 0 rgba(255,95,162,0)}}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes pop{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes sparkle{0%,100%{opacity:.35;transform:scale(.85) rotate(0)}50%{opacity:1;transform:scale(1.12) rotate(18deg)}}
+.reveal{opacity:1;transform:none}
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.js .reveal.d1{transition-delay:.08s}.js .reveal.d2{transition-delay:.16s}.js .reveal.d3{transition-delay:.24s}.js .reveal.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ---------- ticker ---------- */
+.ticker{background:var(--grad);background-size:220% 100%;animation:gradShift 10s ease infinite;color:#fff;font-size:.82rem;overflow:hidden;white-space:nowrap}
+.ticker .track{display:inline-block;padding:.5rem 0;animation:ticker 28s linear infinite}
+.ticker span{padding:0 1.4rem;font-weight:800;letter-spacing:.3px}
+.ticker b{color:#fff3c9}
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:900}
+.brand .m{width:46px;height:46px;border-radius:12px;background:#fff;border:1px solid var(--line);padding:3px;object-fit:contain;display:grid;place-items:center;font-size:1.2rem;box-shadow:var(--sh);animation:floaty 5s ease-in-out infinite}
+.brand .t{display:flex;flex-direction:column;line-height:1.05}
+.brand .t b{font-size:1.03rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand .t small{font-size:.68rem;color:var(--muted);letter-spacing:1.3px;text-transform:uppercase}
+nav ul{display:flex;gap:1.3rem;list-style:none;margin:0;padding:0}
+nav a{color:#5c4767;font-weight:700;font-size:.93rem;position:relative}
+nav a::after{content:"";position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--grad);transition:right .3s}
+nav a:hover::after{right:0}
+nav a:hover{color:var(--magenta)}
+.btn{position:relative;overflow:hidden;display:inline-block;padding:.8rem 1.25rem;border-radius:999px;font-weight:900;color:#fff;background:var(--grad);background-size:200% 100%;box-shadow:var(--sh);white-space:nowrap;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 20px 46px rgba(216,30,138,.28)}
+.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);background-size:220% 100%;animation:shimmer 3.4s ease-in-out infinite}
+.btn.gold{background:linear-gradient(120deg,#ffc445,#ff9f43);color:#4a2c00}
+.btn.line{background:#fff;color:var(--magenta);border:2px solid #ffd3e6;box-shadow:none}
+.btn.small{padding:.6rem 1rem;font-size:.88rem}
+/* floating petals */
+.petal{position:absolute;top:-46px;width:14px;height:14px;border-radius:62% 0 62% 0;opacity:0;pointer-events:none;animation:fall linear infinite}
+@keyframes fall{0%{transform:translateY(-46px) rotate(0);opacity:0}12%{opacity:.55}100%{transform:translateY(580px) rotate(340deg);opacity:0}}
+.petal.p1{left:7%;background:#ffb7d5;animation-duration:13s;animation-delay:.4s}
+.petal.p2{left:21%;background:#ffd0a8;animation-duration:16s;animation-delay:1.7s}
+.petal.p3{left:37%;background:#e0c2ff;animation-duration:14s;animation-delay:.9s}
+.petal.p4{left:55%;background:#ffc2dd;animation-duration:17s;animation-delay:2.5s}
+.petal.p5{left:71%;background:#ffe0b3;animation-duration:15s;animation-delay:1.2s}
+.petal.p6{left:87%;background:#ffb7d5;animation-duration:18s;animation-delay:3.1s}
+/* hero drawn eyebrow arc */
+.hbrow{width:min(220px,58vw);height:auto;display:block;margin:0 0 .35rem;overflow:visible}
+.hbrow path{fill:none;stroke-width:5;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1.5s .55s cubic-bezier(.5,0,.2,1) forwards}
+.hbrow .b2s{stroke:#ffb0d4;stroke-width:2}
+.hbrow .b1s{stroke:var(--magenta)}
+/* ---------- hero (LIGHT) ---------- */
+.hero{position:relative;background:
+ radial-gradient(900px 420px at 8% -10%,#ffe6f3 0%,rgba(255,230,243,0) 60%),
+ radial-gradient(760px 420px at 96% 6%,#ffeede 0%,rgba(255,238,222,0) 62%),
+ radial-gradient(700px 460px at 55% 108%,#f1e6ff 0%,rgba(241,230,255,0) 60%),
+ #ffffff;
+ padding:.75rem 0 3rem;overflow:hidden}
+.hero .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.42;pointer-events:none}
+.hero .b1{width:400px;height:400px;background:#ff9ec9;top:-130px;left:-90px;animation:blob 18s ease-in-out infinite}
+.hero .b2{width:340px;height:340px;background:#ffc59b;bottom:-150px;right:-70px;animation:blob 22s ease-in-out infinite reverse}
+.hero .b3{width:260px;height:260px;background:#c9a6ff;top:44%;left:46%;animation:blob 26s ease-in-out infinite}
+.sp{position:absolute;color:#ff8ec0;animation:sparkle 3.6s ease-in-out infinite;pointer-events:none;font-size:1.15rem}
+.sp:nth-child(1){top:14%;left:7%}.sp:nth-child(2){top:24%;right:10%;animation-delay:.8s}
+.sp:nth-child(3){bottom:16%;left:16%;animation-delay:1.4s}.sp:nth-child(4){top:60%;right:24%;animation-delay:2s}
+.hero .grid{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:2.4rem;align-items:start;padding-top:.15rem}
+.tag{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1.6px solid #ffd3e6;color:var(--magenta);padding:.42rem .95rem;border-radius:999px;font-size:.8rem;font-weight:900;letter-spacing:.3px;box-shadow:0 6px 18px rgba(216,30,138,.08);animation:pop .8s ease both}
+h1{font-size:clamp(2rem,5vw,3.35rem);line-height:1.07;margin:.9rem 0 .7rem;letter-spacing:-1px;animation:pop .9s .1s ease both}
+h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:#5f4b69;font-size:1.06rem;max-width:54ch;margin:0 0 1.4rem;animation:pop 1s .18s ease both}
+.cta-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem;animation:pop 1s .26s ease both}
+.stats{display:flex;gap:1.7rem;flex-wrap:wrap;animation:pop 1s .34s ease both}
+.stat b{display:block;font-size:1.5rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat small{color:var(--muted);font-size:.78rem}
+.trust{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.1rem;font-size:.86rem;color:#6b5675}
+.trust b{color:var(--magenta)}
+.bookbox{position:relative;background:#fff;border-radius:22px;padding:1.4rem;border:1.6px solid #ffe1ef;box-shadow:0 26px 60px rgba(216,30,138,.16);animation:pop 1s .2s ease both}
+.bookbox::before{content:"";position:absolute;inset:-3px;border-radius:25px;background:var(--grad);z-index:-1;filter:blur(16px);opacity:.3}
+.bookbox h3{margin:.1rem 0 .2rem;font-size:1.18rem}
+.bookbox h3 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bookbox p.s{margin:0 0 .9rem;color:var(--muted);font-size:.89rem}
+label{display:block;font-size:.8rem;font-weight:800;margin:.55rem 0 .2rem;color:#6d4b7c}
+input,select,textarea{width:100%;padding:.72rem .85rem;border:1.6px solid #f3dbe9;border-radius:12px;font:inherit;background:#fffafd;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,95,162,.16)}
+button{width:100%;margin-top:.9rem;border:0;padding:.9rem;border-radius:13px;font-weight:900;font-size:1rem;color:#fff;background:var(--grad);background-size:200% 100%;cursor:pointer;animation:pulse 2.8s infinite}
+button:hover{animation:none;transform:translateY(-2px)}
+.done{display:none;color:#0f7a4a;font-weight:800;font-size:.9rem;margin:.6rem 0 0}
+.tiny{font-size:.75rem;color:var(--muted);margin:.55rem 0 0}
+/* header banner + photo veil (Adeel-style placement) */
+.hero .banner{display:none}
+.hero .veil{display:none}
+.hero .blob{display:none}
+/* top patti — sirf strip, koi text nahi */
+.ticker.vbar{padding:0;height:9px;background-size:200% 100%;overflow:hidden}
+/* top-of-page banner + slideshow (moved above the hero text) */
+.top-slider{padding:0;margin:0}
+.top-slider .slider{border-radius:18px;box-shadow:0 18px 44px rgba(140,47,74,.18);margin:0 0 .45rem}
+.slider.noanim img{transition:none!important;animation:none!important}
+@media(max-width:560px){.top-slider{padding:0}}
+.slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.05) translateX(4%);transition:opacity .4s ease,transform .4s ease}
+.slider img.on{opacity:1;transform:scale(1) translateX(0);animation:kb 2.5s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
+.hero .grid{padding-top:.15rem}
+/* slideshow (Adeel-style: 1280x512 slides) */
+.slider{position:relative;width:100%;aspect-ratio:1280/512;border-radius:20px;overflow:hidden;border:1.6px solid var(--line);box-shadow:var(--sh);background:#fff}
+.slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease}
+.slider img.on{opacity:1}
+.slider .nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.86);color:#8c2f4a;font-size:1.5rem;line-height:1;cursor:pointer;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.15);z-index:3;animation:none}
+.slider .nav.prev{left:.7rem}.slider .nav.next{right:.7rem}
+.slider .dots{position:absolute;left:0;right:0;bottom:.7rem;display:flex;gap:.45rem;justify-content:center;z-index:3}
+.slider .dot{width:10px;height:10px;padding:0;border-radius:50%;border:0;background:rgba(255,255,255,.6);cursor:pointer;animation:none}
+.slider .dot.on{background:#fff;box-shadow:0 0 0 3px rgba(216,30,138,.35)}
+/* ---------- sections ---------- */
+section{padding:3.2rem 0}
+.kicker{display:inline-block;font-size:.76rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--magenta);margin-bottom:.4rem}
+h2{font-size:clamp(1.5rem,3vw,2.2rem);margin:0 0 .35rem;letter-spacing:-.6px}
+h2 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:0 0 1.8rem;max-width:64ch}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem}
+.list{background:#fff;border:1.6px solid var(--line);border-radius:var(--r);padding:1.3rem;transition:transform .3s,box-shadow .3s}
+.list:hover{transform:translateY(-6px);box-shadow:var(--sh)}
+.list h3{margin:.1rem 0 .7rem;font-size:1.05rem;display:flex;align-items:center;gap:.5rem}
+.list h3 .dot{width:10px;height:10px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 4px rgba(216,30,138,.1)}
+.row{display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;border-bottom:1px dashed #f7e3ee;font-size:.95rem;transition:padding-left .25s,background .25s}
+.row:hover{padding-left:.5rem;background:#fff6fb}
+.row:last-child{border:0}
+.row span:last-child{font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.card{background:#fff;border:1.6px solid var(--line);border-radius:var(--r);padding:1.2rem;transition:transform .3s,box-shadow .3s,border-color .3s}
+.card:hover{transform:translateY(-8px) rotate(-.4deg);box-shadow:var(--sh);border-color:#ffd3e6}
+.card .i{width:48px;height:48px;border-radius:14px;background:var(--grad-soft);display:grid;place-items:center;font-size:1.35rem;margin-bottom:.65rem;transition:transform .3s}
+.card:hover .i{transform:scale(1.12) rotate(6deg)}
+.card h3{margin:.1rem 0 .35rem;font-size:1.03rem}
+.card p{margin:0;color:var(--muted);font-size:.92rem}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}
+.ph{position:relative;aspect-ratio:1;border-radius:16px;border:1.6px solid var(--line);display:grid;place-items:center;text-align:center;padding:.6rem;font-weight:900;font-size:.85rem;color:#8a2b5c;overflow:hidden;transition:transform .35s,box-shadow .35s}
+.ph:hover{transform:scale(1.04) rotate(1deg);box-shadow:var(--sh)}
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,255,255,.6),transparent);background-size:220% 100%;animation:shimmer 4.4s ease-in-out infinite}
+.ph.c1{background:linear-gradient(135deg,#ffe0ee,#ffc7dd)}
+.ph.c2{background:linear-gradient(135deg,#ffeada,#ffd0b3)}
+.ph.c3{background:linear-gradient(135deg,#f3e6ff,#e0ccff)}
+.ph.c4{background:linear-gradient(135deg,#ffe6f1,#ffd0e0)}
+.ph.c5{background:linear-gradient(135deg,#fff0d9,#ffe0b8)}
+.ph.c6{background:linear-gradient(135deg,#eae2ff,#d9ccff)}
+.ph.c7{background:linear-gradient(135deg,#ffe3e3,#ffcccc)}
+.ph.c8{background:linear-gradient(135deg,#e2f6ff,#c9ecff)}
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee .mtrack{display:flex;gap:1rem;width:max-content;animation:marquee 34s linear infinite}
+.marquee:hover .mtrack{animation-play-state:paused}
+.rev{min-width:320px;background:#fff;border:1.6px solid var(--line);border-radius:var(--r);padding:1.15rem;box-shadow:0 6px 22px rgba(216,30,138,.06)}
+.stars{color:#f7a41d;letter-spacing:2px}
+.rev p{font-size:.94rem;color:#4b3357;margin:.45rem 0 .6rem}
+.rev .who{font-weight:900;font-size:.84rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.info{display:grid;grid-template-columns:1.05fr .95fr;gap:1.3rem}
+.panel{background:#fff;border:1.6px solid var(--line);border-radius:var(--r);padding:1.25rem}
+.panel h3{margin:.1rem 0 .5rem}
+.hours{width:100%;border-collapse:collapse;font-size:.94rem}
+.hours td{padding:.4rem 0;border-bottom:1px dashed #f7e3ee}
+.hours td:last-child{text-align:right;font-weight:800}
+.map{min-height:280px;border-radius:var(--r);border:1.6px solid var(--line);background:linear-gradient(135deg,#fff6fb,#ffeef6);display:grid;place-items:center;text-align:center;color:var(--magenta);font-weight:900;padding:1rem;position:relative;overflow:hidden}
+.map .pin{width:54px;height:54px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:1.5rem;box-shadow:0 12px 26px rgba(216,30,138,.3);animation:floaty 3.6s ease-in-out infinite}
+.band{position:relative;overflow:hidden;background:var(--grad);background-size:220% 100%;animation:gradShift 12s ease infinite;color:#fff;border-radius:22px;padding:2rem;display:grid;grid-template-columns:1.5fr .5fr;gap:1.2rem;align-items:center}
+.band h2{color:#fff;margin:0 0 .3rem}
+.band p{margin:0;color:#ffe6f3}
+footer{background:var(--bg2);border-top:1px solid var(--line);color:#6b5675;padding:2rem 0;font-size:.87rem}
+footer .g{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:1.4rem}
+footer h4{color:var(--ink);margin:.2rem 0 .45rem;font-size:.95rem}
+footer a{color:var(--magenta)}
+.fixbar{position:fixed;left:0;right:0;bottom:0;display:none;background:var(--grad);background-size:200% 100%;animation:pulse 2.4s infinite,gradShift 8s infinite;color:#fff;text-align:center;padding:.9rem;font-weight:900;z-index:60}
+.demo{position:fixed;right:.7rem;bottom:.7rem;background:#fff;border:1.6px solid #ffd3e6;color:var(--magenta);font-size:.72rem;font-weight:800;padding:.4rem .7rem;border-radius:999px;z-index:70;box-shadow:0 8px 20px rgba(216,30,138,.12)}
+@media(max-width:900px){
+ .hero .grid,.svc,.info,.band{grid-template-columns:1fr}nav ul{display:none}
+ .cards{grid-template-columns:1fr 1fr}.gal{grid-template-columns:1fr 1fr}
+ footer .g{grid-template-columns:1fr}.fixbar{display:block}body{padding-bottom:3.4rem}
+}
+@media(max-width:560px){.cards{grid-template-columns:1fr}.stats{gap:1.1rem}}
+</style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript></head>
+<body>
+<script>
+// content ko kabhi chhupa na chhoro: agar JS fail ho ya purana browser ho to sab dikh jaye
+(function(){
+  var reveal = function(){ document.querySelectorAll('.reveal').forEach(function(e){ e.classList.add('in'); }); };
+  try{
+    if (!('IntersectionObserver' in window)) { reveal(); return; }
+    setTimeout(reveal, 1500);                     // safety net (independent of other scripts)
+  }catch(e){ reveal(); }
+})();
+</script>
+
+<div class="ticker vbar" aria-hidden="true"></div>
+
+<header><div class="wrap nav">
+  <a class="brand" href="#top"><img class="m" src="logo.jpg" alt="Lovely Magic Nails logo"><span class="t"><b>Lovely Magic Nails</b><small>Manicure · Gel · Nail art</small></span></a>
+  <nav><ul>
+    <li><a href="#services">Prices</a></li><li><a href="#why">Why us</a></li>
+    <li><a href="#gallery">Gallery</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#visit">Visit</a></li>
+  </ul></nav>
+  <a class="btn small" href="#book" target="_blank" rel="noopener">Book now</a>
+</div></header>
+
+<section class="hero" id="top">
+  <div class="top-slider"><div class="wrap">
+    <div class="slider reveal" id="slider">
+      <img class="on" src="banner/slide-1.jpg" alt="Lovely Magic Nails — banner">
+      <img src="banner/slide-2.jpg" alt="Lovely Magic Nails — banner 2">
+      <img src="banner/slide-3.jpg" alt="Lovely Magic Nails — banner 3">
+      <img src="banner/slide-4.jpg" alt="Lovely Magic Nails — banner 4">
+      <img src="banner/slide-5.jpg" alt="Lovely Magic Nails — banner 5">
+    </div>
+  </div></div>
+  <span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span>
+  <span class="petal p4"></span><span class="petal p5"></span><span class="petal p6"></span>
+  <div class="wrap grid">
+    <div>
+      <span class="tag">✨ Nail salon on E Tremont Ave — Bronx, NY</span>
+      </span>
+      <h1>Nails that make people <span class="hl">ask where you got them</span> done.</h1>
+      <p class="lead">Manicure, pedicure, gel and acrylic sets, plus custom nail art — clean tools, gentle hands, and a finish you will want to show off.</p>
+      <div class="cta-row">
+        <a class="btn" href="#book">💅 Book your appointment</a>
+        <a class="btn line" href="#services">See services</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>💅</b><small>gel &amp; acrylic</small></div>
+        <div class="stat"><b>✨</b><small>custom nail art</small></div>
+        <div class="stat"><b>🚶</b><small>walk-ins welcome</small></div>
+        <div class="stat"><b>🧼</b><small>clean tools</small></div>
+      </div>
+      <div class="trust">
+        <span><b>Walk-ins</b> seated quickly</span>
+        <span><b>Fresh tools</b> sanitised per client</span>
+        <span><b>Gentle</b> on nails and cuticles</span>
+      </div>
+    </div>
+    <form class="bookbox" id="book" onsubmit="event.preventDefault();this.querySelector('.done').style.display='block';this.querySelector('button').style.display='none';">
+      <h3>Book in <span>30 seconds</span></h3>
+      <p class="s">Tell us what you need — we confirm by text or WhatsApp.</p>
+      <label for="n">Name</label><input id="n" required placeholder="Your name">
+      <label for="p">Phone</label><input id="p" type="tel" required placeholder="Your phone number">
+      <label for="s">Service</label>
+      <select id="s">
+        <option>Manicure (classic)</option><option>Gel manicure</option>
+        <option>Spa pedicure</option><option>Acrylic full set</option>
+        <option>Gel-X / builder gel</option><option>Refill</option>
+        <option>Nail art</option><option>Soak-off removal</option>
+      </select>
+      <label for="d">Preferred day</label><input id="d" type="date">
+      <button type="submit">Request appointment →</button>
+      <p class="done">✅ Got it — we'll text you a confirmation shortly.</p>
+      <p class="tiny">No payment now. Free to reschedule.</p>
+    </form>
+  </div>
+</section>
+
+<section id="services"><div class="wrap">
+  <span class="kicker reveal">Services</span>
+  <h2 class="reveal">What we <span class="g">do</span></h2>
+  <p class="sub reveal d1">Sets, art and care for natural nails. Prices depend on length, design and product — ask us in the salon or send a message.</p>
+  <div class="svc">
+    <div class="list reveal d1">
+      <h3><span class="dot"></span>Manicure &amp; pedicure</h3>
+      <div class="row"><span>Classic manicure</span><span></span></div>
+      <div class="row"><span>Spa pedicure</span><span></span></div>
+      <div class="row"><span>Gel manicure</span><span></span></div>
+      <div class="row"><span>Polish change</span><span></span></div>
+      <h3 style="margin-top:1.1rem"><span class="dot"></span>Enhancements</h3>
+      <div class="row"><span>Acrylic full set</span><span></span></div>
+      <div class="row"><span>Gel-X / builder gel</span><span></span></div>
+      <div class="row"><span>Refill</span><span></span></div>
+      <div class="row"><span>French tips</span><span></span></div>
+    </div>
+    <div class="list reveal d2">
+      <h3><span class="dot"></span>Nail art</h3>
+      <div class="row"><span>Simple art (per nail)</span><span></span></div>
+      <div class="row"><span>Chrome &amp; cat eye</span><span></span></div>
+      <div class="row"><span>Ombre / French</span><span></span></div>
+      <div class="row"><span>Rhinestones &amp; charms</span><span></span></div>
+      <h3 style="margin-top:1.1rem"><span class="dot"></span>Care &amp; extras</h3>
+      <div class="row"><span>Soak-off removal</span><span></span></div>
+      <div class="row"><span>Cuticle care</span><span></span></div>
+      <div class="row"><span>Hand &amp; foot massage</span><span></span></div>
+      <div class="row"><span>Party / group booking</span><span></span></div>
+    </div>
+  </div>
+  <p class="tiny">Preview website — prices are set by the salon and will be added from the salon's current list.</p>
+</div></section>
+
+<section id="why" style="background:var(--bg2)"><div class="wrap">
+  <span class="kicker reveal">Why us</span>
+  <h2 class="reveal">Why clients <span class="g">keep coming back</span></h2>
+  <p class="sub reveal d1">A neighbourhood salon that treats every set like it is for a friend.</p>
+  <div class="cards">
+    <div class="card reveal d1"><div class="i">🎯</div><h3>Shape and length your way</h3><p>Almond, square, coffin or oval — we build the set around your hands, not a template.</p></div>
+    <div class="card reveal d2"><div class="i">💗</div><h3>Gentle, patient, welcoming</h3><p>First set or fiftieth, you get calm hands and honest advice on what will last.</p></div>
+    <div class="card reveal d3"><div class="i">🧼</div><h3>Hygiene you can see</h3><p>Tools sanitised and files replaced for every client — no shortcuts.</p></div>
+    <div class="card reveal d1"><div class="i">✨</div><h3>Art that actually lasts</h3><p>Chrome, ombre, charms or simple lines — sealed properly so it stays put.</p></div>
+    <div class="card reveal d2"><div class="i">⚡</div><h3>On time, no long waits</h3><p>Booked appointments start on time and walk-ins are seated as soon as a table frees up.</p></div>
+    <div class="card reveal d3"><div class="i">💵</div><h3>Fair neighbourhood prices</h3><p>Straight pricing, cash or card — no surprises at the counter.</p></div>
+  </div>
+</div></section>
+
+
+
+<section id="gallery"><div class="wrap">
+  <span class="kicker reveal">Gallery</span>
+  <h2 class="reveal">Our <span class="g">work</span></h2>
+  <p class="sub reveal d1">A look at the salon's own photos — client sets and nail art.</p>
+  <div class="gal">
+    <div class="ph c1 reveal d1"><img src="banner/slide-1.jpg" alt="Lovely Magic Nails — nail work 1" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="ph c2 reveal d2"><img src="banner/slide-2.jpg" alt="Lovely Magic Nails — nail work 2" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="ph c3 reveal d3"><img src="banner/slide-3.jpg" alt="Lovely Magic Nails — nail work 3" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="ph c4 reveal d4"><img src="banner/slide-4.jpg" alt="Lovely Magic Nails — nail work 4" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+    <div class="ph c5 reveal d4"><img src="banner/slide-5.jpg" alt="Lovely Magic Nails — nail work 5" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>
+  </div>
+</div></section>
+
+<section id="reviews" style="background:var(--bg2)"><div class="wrap">
+  <span class="kicker reveal">Reviews</span>
+  <h2 class="reveal">Our Google <span class="g">reviews</span></h2>
+  <p class="sub reveal d1">We would rather show you the real thing — read what clients say about us, and leave yours after your visit.</p>
+  <div style="text-align:center;margin:1.2rem 0"><a class="btn gold" href="https://www.google.com/maps/search/?api=1&query=Lovely+Magic+Nails+3710+E+Tremont+Ave+Bronx+NY+10465" target="_blank" rel="noopener">⭐ Read reviews on Google</a></div>
+  <p class="tiny" style="text-align:center">Loved your nails? A quick review helps a small salon a lot. 💗</p>
+</div></section>
+
+<section id="visit"><div class="wrap">
+  <span class="kicker reveal">Visit</span>
+  <h2 class="reveal">Find <span class="g">us</span></h2>
+  <p class="sub reveal d1">Walk-ins welcome. Booking ahead means less waiting on weekends.</p>
+  <div class="info">
+    <div class="panel reveal d1">
+      <h3>Where to find us</h3>
+      <p style="margin:.2rem 0"><a href="https://www.google.com/maps/search/?api=1&query=Lovely+Magic+Nails+3710+E+Tremont+Ave+Bronx+NY+10465" target="_blank" rel="noopener">📍 3710 E Tremont Ave, Bronx, NY 10465</a></p>
+      <h3 style="margin-top:1rem">Before you come</h3>
+      <p style="margin:.2rem 0;color:#5b6472">Walk-ins are welcome — for a full set or nail art, sending a request in the form above saves waiting. Cash and card accepted.</p>
+      <a class="btn small" style="margin-top:.7rem" href="#book">Request an appointment</a>
+      <p class="tiny">Phone number and opening hours are being added from the salon's Google profile.</p>
+    </div>
+    <div class="map reveal d2" style="padding:0;overflow:hidden">
+      <iframe src="https://maps.google.com/maps?q=Lovely%20Magic%20Nails%2C%203710%20E%20Tremont%20Ave%2C%20Bronx%20NY%2010465&output=embed" title="Lovely Magic Nails on Google Maps" loading="lazy" style="width:100%;height:100%;min-height:280px;border:0" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="btn small" style="position:absolute;left:1rem;bottom:1rem" href="https://www.google.com/maps/search/?api=1&query=Lovely+Magic+Nails+3710+E+Tremont+Ave+Bronx+NY+10465" target="_blank" rel="noopener">Get directions</a>
+    </div>
+    </div>
+  </div>
+  <div class="band reveal" style="margin-top:1.7rem">
+    <div><h2>Ready for your next set?</h2><p>Book now or just walk in — we will take care of the rest.</p></div>
+    <div style="text-align:right"><a class="btn gold" href="#book">Book Now</a></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap g">
+  <div><h4>Lovely Magic Nails</h4>
+    <p>Threading · Waxing · Lash extensions · Manicure &amp; pedicure<br>Bronx, NY · Walk-ins welcome</p></div>
+  <div><h4>Contact</h4><p><br><br>Mon–Sun, see hours above</p></div>
+  <div><h4>Services</h4><p><a href="#services">Manicure &amp; pedicure</a><br><a href="#services">Gel &amp; acrylic</a><br><a href="#services">Nail art</a><br><a href="#services">Nails</a></p></div>
+</div>
+<div class="wrap" style="margin-top:1.3rem;border-top:1px solid var(--line);padding-top:.9rem">© 2026 Lovely Magic Nails · Demo preview</div></footer>
+
+<a class="fixbar" href="#book" target="_blank" rel="noopener">Book Now →</a>
+<div class="demo">DEMO preview — sample design</div>
+
+<script>
+try{ document.documentElement.classList.add('js'); }catch(e){}
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// safety: never leave content hidden (old browsers / observer issues)
+setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(e=>e.classList.add('in')),1100);
+const co=new IntersectionObserver((es)=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,to=+el.dataset.count;let n=0;const step=Math.max(1,Math.round(to/38));const t=setInterval(()=>{n+=step;if(n>=to){n=to;clearInterval(t)}el.textContent=n},26);co.unobserve(el)})},{threshold:.4});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+const blobs=document.querySelectorAll('.hero .blob');
+if(blobs.length&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  addEventListener('scroll',()=>{const y=scrollY*0.05;blobs.forEach((b,i)=>b.style.transform=`translateY(${y*(i+1)*0.5}px)`)},{passive:true});
+}
+const fix=document.querySelector('.fixbar');
+if(fix){fix.style.opacity=0;addEventListener('scroll',()=>{fix.style.opacity=scrollY>520?1:0;fix.style.transition='opacity .4s'},{passive:true})}
+</script>
+<script>
+// Slideshow (auto-rotate 4.5s, dots + arrows, hover pause; reduced-motion par auto nahi)
+(function(){
+  const box = document.getElementById('slider');
+  if (!box) return;
+  const imgs = [...box.querySelectorAll('img')];
+  let i = 0, timer = null;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) box.classList.add('noanim');
+  const show = (n) => {
+    i = (n + imgs.length) % imgs.length;
+    imgs.forEach((im, k) => im.classList.toggle('on', k === i));
+  };
+  const start = () => { if (timer) return; timer = setInterval(() => show(i + 1), 2500); };
+  const stop = () => { clearInterval(timer); timer = null; };
+  box.addEventListener('mouseenter', stop);
+  box.addEventListener('mouseleave', start);
+  box.addEventListener('touchstart', stop, { passive: true });
+  box.addEventListener('touchend', start, { passive: true });
+  document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+  start();
+})();
+</script>
+
+<!-- preview tracker (counts only: opens, time on page, repeat views, referrer; no personal data) -->
+<script>
+(function(){
+  try{
+    var NS = "lovely-magic-nails-v1", META = "lovely-magic-nails-v1-meta", EPOCH = 1;
+    var API = "https://abacus.jasoncameron.dev";
+    var q = new URLSearchParams(location.search);
+    var isMe = q.get("me") === "1";                     // Zain khud jab check kare: ?me=1
+    var allowHeadless = q.get("cnt") === "1";           // sirf testing ke liye
+    if (navigator.webdriver && !allowHeadless) return;  // headless/bot hits count na hon
+
+    function key(k){ return k + "-e" + EPOCH; }         // reset = epoch badal jata hai (server par)
+    function bump(k, by){
+      by = by || 1;
+      var url = API + "/hit/" + NS + "/" + key(k) + (by > 1 ? "?amount=" + by : "");
+      try { fetch(url, { mode:"cors", cache:"no-store" }).catch(function(){}); } catch(e){}
+    }
+    function read(k){
+      try { return fetch(API + "/get/" + NS + "/" + key(k), { cache: "no-store" }).then(function(r){ return r.json(); }); }
+      catch(e){ return Promise.resolve(null); }
+    }
+    window.shanuPreviewStats = function(){
+      var keys = ["opens-other","opens-me","new-visitors","repeat-opens","seconds","ref-whatsapp","ref-telegram","ref-other"];
+      return Promise.all(keys.map(read)).then(function(res){
+        var out = {};
+        keys.forEach(function(k, i){ out[k] = (res[i] && typeof res[i].value === "number") ? res[i].value : 0; });
+        return out;
+      });
+    };
+
+    function start(){
+      if (isMe){ bump("opens-me"); }
+      else {
+        bump("opens-other");
+        // naya browser ya dobara?
+        var seen = false;
+        try { seen = !!localStorage.getItem("lovely-magic-nails-seen"); } catch(e){}
+        if (seen) bump("repeat-opens");
+        else { bump("new-visitors"); try { localStorage.setItem("lovely-magic-nails-seen", "1"); } catch(e){} }
+        // referrer se pata chale kahan se khula (WhatsApp/Telegram/other)
+        var ref = (document.referrer || "").toLowerCase();
+        if (ref.indexOf("whatsapp") > -1) bump("ref-whatsapp");
+        else if (ref.indexOf("telegram") > -1 || ref.indexOf("t.me") > -1) bump("ref-telegram");
+        else if (ref) bump("ref-other");
+      }
+      // attention time: har 15s par 15 seconds add karo (page band hone par ruk jata hai)
+      setInterval(function(){ if (!document.hidden) bump("seconds", 15); }, 15000);
+      bump("seconds", 2);
+    }
+
+    fetch(API + "/get/" + META + "/epoch", { cache: "no-store" })
+      .then(function(r){ return r.json(); })
+      .then(function(d){ if (d && typeof d.value === "number" && d.value > 0) EPOCH = d.value; })
+      .catch(function(){})
+      .then(start);
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
