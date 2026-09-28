@@ -459,7 +459,7 @@ if(fix){fix.style.opacity=0;addEventListener('scroll',()=>{fix.style.opacity=scr
       try { return fetch(API + "/get/" + NS + "/" + key(k), { cache: "no-store" }).then(function(r){ return r.json(); }); }
       catch(e){ return Promise.resolve(null); }
     }
-    window.shanuPreviewStats = function(){
+    window.lmnPreviewStats = function(){
       var keys = ["opens-other","opens-me","new-visitors","repeat-opens","seconds","ref-whatsapp","ref-telegram","ref-other"];
       return Promise.all(keys.map(read)).then(function(res){
         var out = {};
